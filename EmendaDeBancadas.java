@@ -7,10 +7,10 @@ public class EmendaDeBancadas extends Emenda {
     private String linkAta;
     private String parlamentarSugeriu;
 
-    public EmendaDeBancadas(int numero, double codigo, String tipo, String autoria, String ufAutoria, String objetivo,
+    public EmendaDeBancadas(int numero, double codigo, String tipo, String autoria, String estadoAutoria,
+            String objetivo,
             LocalDate ano, String linkAta, String parlamentarSugeriu) {
-        super(numero, codigo, tipo, autoria, ufAutoria, objetivo, ano);
-
+        super(numero, codigo, tipo, autoria, estadoAutoria, objetivo, ano);
         this.assinaturas = new ArrayList<>();
         this.linkAta = linkAta;
         this.parlamentarSugeriu = parlamentarSugeriu;
@@ -25,9 +25,7 @@ public class EmendaDeBancadas extends Emenda {
     }
 
     public void adicionarAssinatura(String nomeParlamentar, String afiliacao) {
-        AssinaturaP assinatura = new AssinaturaP(nomeParlamentar, afiliacao);
-        this.assinaturas.add(assinatura);
-
+        this.assinaturas.add(new AssinaturaP(nomeParlamentar, afiliacao));
     }
 
     public String getLinkAta() {
@@ -46,4 +44,13 @@ public class EmendaDeBancadas extends Emenda {
         this.parlamentarSugeriu = parlamentarSugeriu;
     }
 
+    @Override
+    public void imprimir() {
+        super.imprimir();
+        System.out.println("Sugerida por: " + getParlamentarSugeriu());
+        System.out.println("Assinaturas: " + getAssinaturas().size());
+        System.out.printf("Valor Empenhado: R$ %,.2f\n", calcularValorPorFase("Empenho"));
+        System.out.printf("Valor Liquidado: R$ %,.2f\n", calcularValorPorFase("Liquidação"));
+        System.out.printf("Valor Pago: R$ %,.2f\n", calcularValorPorFase("Pagamento"));
+    }
 }
