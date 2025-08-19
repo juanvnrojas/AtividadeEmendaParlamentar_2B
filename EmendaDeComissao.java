@@ -9,10 +9,10 @@ public class EmendaDeComissao extends Emenda {
     private String linkRelatorioAtividades;
     private String parlamentarSugeriu;
 
-    public EmendaDeComissao(int numero, double codigo, String tipo, String autoria, String ufAutoria, String objetivo,
+    public EmendaDeComissao(int numero, double codigo, String tipo, String autoria, String estadoAutoria,
+            String objetivo,
             LocalDate ano, String linkComissao, String linkRelatorioAtividades, String parlamentarSugeriu) {
-        super(numero, codigo, tipo, autoria, ufAutoria, objetivo, ano);
-
+        super(numero, codigo, tipo, autoria, estadoAutoria, objetivo, ano);
         this.linkComissao = linkComissao;
         this.linkRelatorioAtividades = linkRelatorioAtividades;
         this.parlamentarSugeriu = parlamentarSugeriu;
@@ -28,8 +28,7 @@ public class EmendaDeComissao extends Emenda {
     }
 
     public void adicionarParlamentar(String nomeParlamentar, String afiliacao) {
-        AssinaturaP parlamentar = new AssinaturaP(nomeParlamentar, afiliacao);
-        this.parlamentaresComissao.add(parlamentar);
+        this.parlamentaresComissao.add(new AssinaturaP(nomeParlamentar, afiliacao));
     }
 
     public String getLinkComissao() {
@@ -54,5 +53,15 @@ public class EmendaDeComissao extends Emenda {
 
     public void setParlamentarSugeriu(String parlamentarSugeriu) {
         this.parlamentarSugeriu = parlamentarSugeriu;
+    }
+
+    @Override
+    public void imprimir() {
+        super.imprimir();
+        System.out.println("Sugerida por: " + getParlamentarSugeriu());
+        System.out.println("Link da Comissão: " + getLinkComissao());
+        System.out.printf("Valor Empenhado: R$ %,.2f\n", calcularValorPorFase("Empenho"));
+        System.out.printf("Valor Liquidado: R$ %,.2f\n", calcularValorPorFase("Liquidação"));
+        System.out.printf("Valor Pago: R$ %,.2f\n", calcularValorPorFase("Pagamento"));
     }
 }
