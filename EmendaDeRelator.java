@@ -5,10 +5,10 @@ public class EmendaDeRelator extends Emenda {
     private String nomeRelator;
     private String beneficiario;
 
-    public EmendaDeRelator(int numero, double codigo, String tipo, String autoria, String ufAutoria, String objetivo,
+    public EmendaDeRelator(int numero, double codigo, String tipo, String autoria, String estadoAutoria,
+            String objetivo,
             LocalDate ano, String parlamentarAutor, String nomeRelator, String beneficiario) {
-        super(numero, codigo, tipo, autoria, ufAutoria, objetivo, ano);
-
+        super(numero, codigo, tipo, autoria, estadoAutoria, objetivo, ano);
         this.parlamentarAutor = parlamentarAutor;
         this.nomeRelator = nomeRelator;
         this.beneficiario = beneficiario;
@@ -36,5 +36,15 @@ public class EmendaDeRelator extends Emenda {
 
     public void setBeneficiario(String beneficiario) {
         this.beneficiario = beneficiario;
+    }
+
+    @Override
+    public void imprimir() {
+        super.imprimir();
+        System.out.println("Parlamentar Autor: " + getParlamentarAutor());
+        System.out.println("Nome do Relator: " + getNomeRelator());
+        System.out.printf("Valor Empenhado: R$ %,.2f\n", calcularValorPorFase("Empenho"));
+        System.out.printf("Valor Liquidado: R$ %,.2f\n", calcularValorPorFase("Liquidação"));
+        System.out.printf("Valor Pago: R$ %,.2f\n", calcularValorPorFase("Pagamento"));
     }
 }
