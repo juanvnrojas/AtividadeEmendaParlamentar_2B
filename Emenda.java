@@ -6,19 +6,19 @@ public abstract class Emenda {
     private double codigo;
     private String tipo;
     private String autoria;
-    private String ufAutoria;
+    private String estadoAutoria;
     private String objetivo;
     private LocalDate ano;
     private HashMap<String, Documento> documentosRelacionados;
     private HashMap<String, Convenio> conveniosPossuidos;
 
-    public Emenda(int numero, double codigo, String tipo, String autoria, String ufAutoria, String objetivo,
+    public Emenda(int numero, double codigo, String tipo, String autoria, String estadoAutoria, String objetivo,
             LocalDate ano) {
         this.numero = numero;
         this.codigo = codigo;
         this.tipo = tipo;
         this.autoria = autoria;
-        this.ufAutoria = ufAutoria;
+        this.estadoAutoria = estadoAutoria;
         this.objetivo = objetivo;
         this.ano = ano;
         this.documentosRelacionados = new HashMap<>();
@@ -57,12 +57,12 @@ public abstract class Emenda {
         this.autoria = autoria;
     }
 
-    public String getUfAutoria() {
-        return ufAutoria;
+    public String getEstadoAutoria() {
+        return estadoAutoria;
     }
 
-    public void setUfAutoria(String ufAutoria) {
-        this.ufAutoria = ufAutoria;
+    public void setEstadoAutoria(String estadoAutoria) {
+        this.estadoAutoria = estadoAutoria;
     }
 
     public String getObjetivo() {
@@ -99,12 +99,18 @@ public abstract class Emenda {
 
     public double calcularValorPorFase(String fase) {
         double valorTotal = 0.0;
-
         for (Documento doc : this.documentosRelacionados.values()) {
             if (doc.getFase().equalsIgnoreCase(fase)) {
                 valorTotal += doc.getValor();
             }
         }
         return valorTotal;
+    }
+
+    public void imprimir() {
+        System.out.println("\n------------------------------------------------------------");
+        System.out.println("Autoria: " + getAutoria() + " | Ano: " + getAno().getYear());
+        System.out.println("Tipo: " + getTipo());
+        System.out.println("Objetivo: " + getObjetivo());
     }
 }
