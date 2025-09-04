@@ -27,9 +27,9 @@ public class Principal {
                                 "INCREMENTO TEMPORARIO AO CUSTEIO DOS SERVICOS DE ASSISTENCIA HOSPITALAR E AMBULATORIAL",
                                 LocalDate.of(2024, 1, 1), "http://site.gov.br/ata_bancada_pe_2024",
                                 "Deputado(a) Coordenador(a)");
-                emendaBancada1.adicionarAssinatura("Deputado Fictício A", "Partido X");
-                emendaBancada1.adicionarAssinatura("Senadora Fictícia B", "Partido Y");
-                emendaBancada1.adicionarAssinatura("Deputada Fictícia C", "Partido Z");
+                emendaBancada1.adicionarAssinatura("Deputado A", "Partido A");
+                emendaBancada1.adicionarAssinatura("Senadora B", "Partido B");
+                emendaBancada1.adicionarAssinatura("Deputada C", "Partido C");
                 emendaBancada1.getDocumentosRelacionados().put("DOC1",
                                 new Documento(LocalDate.of(2024, 2, 10), "Empenho", 5120000.00,
                                                 "Secretaria Estadual de Saúde"));
@@ -66,3 +66,4 @@ public class Principal {
                 System.out.println("Total de emendas processadas: " + todasAsEmendas.size());
         }
 }
+
